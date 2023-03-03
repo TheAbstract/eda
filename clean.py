@@ -11,7 +11,12 @@ def is_empty(df, plot=False):
     else:
         return null.mean().sort_values()[::-1]
 
-
 def drop_empty(df, percent=0.8):
     thresh = len(df) * (1 - percent)
     return df.dropna(thresh=thresh, axis=1)
+
+def numeric_split(df):
+    numeric = df.select_dtypes('number')
+    objects = df.select_dtypes('object')
+    return numeric, objects
+
