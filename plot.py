@@ -8,6 +8,5 @@ def histbox(df, column):
     ax_box.title.set_text(f'{column} histogram and boxplot')
     sns.boxplot(df['column'], orient='h', ax=ax_box)
     sns.histplot(data=df, x=column, ax=ax_hist)
-    # remove x axis name for the boxplot
-    ax_box.set(xlabel='')
+    ax_box.set(xlabel='')  # remove x axis name for the boxplot
     plt.show()
