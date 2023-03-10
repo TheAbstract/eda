@@ -1,3 +1,5 @@
+from statsmodels.tsa import stattools
+
 def adfuller_test(series):
     result = stattools.adfuller(series.dropna(), autolag='AIC')
     labels = ['ADF Test Statistic', 'p-value', 'Number of Lags Used', 'Number of Observations Used']
