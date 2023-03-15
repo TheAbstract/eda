@@ -10,3 +10,8 @@ def histbox(df, column):
     sns.histplot(data=df, x=column, ax=ax_hist)
     ax_box.set(xlabel='')  # remove x axis name for the boxplot
     plt.show()
+
+def corrplot(df):
+    corrmatrix = df.corr(numeric_only=True)
+    sns.heatmap(corrmatrix, annot=True, vmin=-1, vmax=1, cmap='RdBu')
+    plt.show()
