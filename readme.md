@@ -2,6 +2,7 @@
 
 a collection of scripts for exploratory data analysis.
 
+
 ## useful notebook settings
 
 ignore all warnings:

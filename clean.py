@@ -37,4 +37,5 @@ def remove_highly_correlated(df, threshold):
     corr_triu = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
     above_threshold = [col for col in corr_triu.columns if any(abs(corr_triu[col]) > threshold)]
     df.drop(above_threshold, axis=1, inplace=True)
+    print('Removed variables:', *above_threshold)
     return df
