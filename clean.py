@@ -27,3 +27,14 @@ def numeric_split(df):
     numeric = df.select_dtypes('number')
     objects = df.select_dtypes('object')
     return numeric, objects
+
+def to_snake_case(df):
+    df.columns = [col.strip().replace(' ', '_').lower() for col in df.columns]
+    return df
+
+def remove_highly_correlated(df, threshold):
+    corr_matrix = df.corr(method='spearman', numeric_only=True)
+    corr_triu = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+    above_threshold = [col for col in corr_triu.columns if any(abs(corr_triu[col]) > threshold)]
+    df.drop(above_threshold, axis=1, inplace=True)
+    return df
