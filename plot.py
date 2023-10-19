@@ -19,3 +19,8 @@ def corrplot(df):
     sns.heatmap(corrmatrix, vmin=-1, vmax=1, cmap='RdBu')
     plt.title('Correlation of Variables')
     plt.show()
+
+def showcorr(df):
+    corr = df.corr(method='spearman', numeric_only=True)
+    return corr.style.background_gradient(cmap='coolwarm', axis=None, vmin=-1, vmax=1) \
+        .format(precision=4)
