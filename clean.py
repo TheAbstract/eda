@@ -6,10 +6,14 @@ import seaborn as sns
 def is_missing(df, plot=False):
     null = df.isnull()
     if plot:
+        # Dynamically set the figure size based on the number of columns.
+        plt.figure(figsize=(10, null.shape[1] / 8)) # Adjust the divisor as needed.
         sns.heatmap(null.T, xticklabels=False, cbar=False, cmap='binary')
         plt.show()
     else:
-        return null.mean().sort_values()[::-1]
+        # Adjust pandas display options to show all rows.
+        pd.options.display.max_rows = None
+        return null.mean().sort_values(ascending=False)
 
 def drop_missing(df, percent=0.8):
     thresh = len(df) * (1 - percent)
