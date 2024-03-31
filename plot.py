@@ -24,3 +24,9 @@ def showcorr(df):
     corr = df.corr(method='spearman', numeric_only=True)
     return corr.style.background_gradient(cmap='coolwarm', axis=None, vmin=-1, vmax=1) \
         .format(precision=4)
+
+def prediction_error(model, X, y):
+    fig, axes = plt.subplots(ncols=2, figsize=(11, 4))
+    PredictionErrorDisplay.from_estimator(model, X, y, ax=axes[0], kind='actual_vs_predicted')
+    PredictionErrorDisplay.from_estimator(model, X, y, ax=axes[1], kind='residual_vs_predicted')
+    plt.show()
