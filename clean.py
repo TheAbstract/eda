@@ -43,3 +43,10 @@ def remove_highly_correlated(df, threshold):
     df.drop(above_threshold, axis=1, inplace=True)
     print('Removed variables:', *above_threshold)
     return df
+
+def remove_outliers(df, columns, n_std):
+    for col in columns:
+        mean = df[col].mean()
+        sd = df[col].std()
+        df = df[(df[col] <= mean + (n_std * sd))]
+    return df
