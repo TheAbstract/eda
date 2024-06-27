@@ -16,7 +16,9 @@ def corrplot(df):
     use spearman since it doesn't make assumptions about underlying data distribution.
     '''
     corrmatrix = df.corr(method='spearman', numeric_only=True)
-    sns.heatmap(corrmatrix, vmin=-1, vmax=1, cmap='RdBu')
+    mask = np.zeros_like(corr)
+    mask[np.triu_indices_from(mask)] = True
+    sns.heatmap(corrmatrix, mask=mask, vmin=-1, vmax=1, cmap='RdBu', linewidths=.5)
     plt.title('Correlation of Variables')
     plt.show()
 
