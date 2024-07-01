@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -7,7 +8,7 @@ def is_missing(df, plot=False):
     null = df.isnull()
     if plot:
         # Dynamically set the figure size based on the number of columns.
-        plt.figure(figsize=(10, null.shape[1] / 8)) # Adjust the divisor as needed.
+        # plt.figure(figsize=(10, null.shape[1] / 8)) # Adjust the divisor as needed.
         sns.heatmap(null.T, xticklabels=False, cbar=False, cmap='binary')
         plt.show()
     else:

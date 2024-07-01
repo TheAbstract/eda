@@ -1,3 +1,9 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
+
 def histbox(df, column):
     '''
     plots a histogram with a box-and-whiskers at the top.
@@ -16,16 +22,17 @@ def corrplot(df):
     use spearman since it doesn't make assumptions about underlying data distribution.
     '''
     corrmatrix = df.corr(method='spearman', numeric_only=True)
-    mask = np.zeros_like(corr)
+    mask = np.zeros_like(corrmatrix)
     mask[np.triu_indices_from(mask)] = True
-    sns.heatmap(corrmatrix, mask=mask, vmin=-1, vmax=1, cmap='RdBu', linewidths=.5)
-    plt.title('Correlation of Variables')
-    plt.show()
+    with sns.axes_style(style='white'):
+        sns.heatmap(corrmatrix, mask=mask, cmap='RdBu', linewidths=.5)
+        plt.title('Correlation of Variables')
+        plt.show()
 
 def showcorr(df):
     corr = df.corr(method='spearman', numeric_only=True)
-    return corr.style.background_gradient(cmap='coolwarm', axis=None, vmin=-1, vmax=1) \
-        .format(precision=4)
+    corr = corr.style.background_gradient(cmap='RdBu', axis=None, vmin=-1, vmax=1)
+    return corr.format(precision=4)
 
 def prediction_error(model, X, y):
     fig, axes = plt.subplots(ncols=2, figsize=(11, 4))
