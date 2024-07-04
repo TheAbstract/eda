@@ -41,8 +41,9 @@ def remove_highly_correlated(df, threshold):
     corr_matrix = df.corr(method='spearman', numeric_only=True)
     corr_triu = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
     above_threshold = [col for col in corr_triu.columns if any(abs(corr_triu[col]) > threshold)]
-    df.drop(above_threshold, axis=1, inplace=True)
-    print('Removed variables:', *above_threshold)
+    if len(above_threshold) > 0:
+        df.drop(above_threshold, axis=1, inplace=True)
+        print('Removed variables:', *above_threshold)
     return df
 
 def remove_outliers(df, columns, n_std):
